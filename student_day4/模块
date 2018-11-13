@@ -1,0 +1,13 @@
+模块import导入默认找到的是当前目录下的方法
+如何调用不再当前目录的模块呢
+当前目录的模块会优先找到，如果找到不会再继续找到，如果找到最后还没有找到就报错
+
+
+D:\py-gs-lean\student_day4  优先寻找
+D:\py-gs-lean 父亲级别
+C:\Users\xiaofeng\AppData\Local\Programs\Python\Python36\python36.zip
+C:\Users\xiaofeng\AppData\Local\Programs\Python\Python36\DLLs
+C:\Users\xiaofeng\AppData\Local\Programs\Python\Python36\lib
+C:\Users\xiaofeng\AppData\Local\Programs\Python\Python36
+C:\Users\xiaofeng\AppData\Local\Programs\Python\Python36\lib\site-packages
+
