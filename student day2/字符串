@@ -1,0 +1,200 @@
+字符串
+	一个个字符组成的有序的序列，是字符的集合
+	使用单引号，双引号，三引号引住的字符序列
+
+	字符串是 不可变 对象，元组大致的认为是不可变的
+	python3起，字符串是unicod类型
+
+字符串的定义 初始化
+s1 = 'string'
+s2 = "string"
+s3 = '''this's a "string"'''
+s4 = 'hello \n manedu.com'
+s5 = r"hello \n mangedg.com"
+s6 = 'c:\windows\nt'
+s7 = R"c:\windows\nt"
+s8 = 'c:\window\\nt'
+
+字符串元素访问 =----下标
+sql = 'select * from user where name=''tom'
+sql[4] #'字符串c'
+sql[4] = 'o'
+有序的字符集合，字符序列
+	for c in sql：
+		print(c)
+		print(type(c)) # 什么类型
+可迭代
+	lst=list(sql)
+
+字符串链接
+	+---string
+	将两个字符串链接在一起
+	返回一个新的字符串
+string.join(iterable)  ->str
+	将可迭代对象链接在一起，使用string作为分隔符
+	可迭代对象本身元素是zfuch
+	返回一个新的字符串
+lst = [1,2,3]
+print("\"".join(lst))  转义引号
+print('.'.join(lst))
+print("\n".join(lst))
+lst = ['1,',['a','b'],3]
+print(''.join(lst))
+	join注意：
+		必须是字符串，列表中是整数也不行
+字符串分割
+	split系
+		将字符处按照分割符分割成若干字符串，并返回列表
+		从左向右
+		sep指定分隔符，缺省情况下，空白字符串做为分隔符
+		maxsplit 指定分割次数，-1表示变量所有
+
+	partition(sep)系*****
+		将字符串安装分隔符分割2段，并返回列表
+		从左至右，遇到分割符就将字符串分割成两部分，返回够、分割符、尾三部分的三元组；如果
+		没有找到分隔符，就返回头，2个空元素的三元组
+		sep分割字符串，必须制定，空的字符串不可以，如果分隔符未找到，则返回当前
+
+	splitlines([keep])
+		回车换行符切割
+		按照行来切分字符串
+		keepends指的是是否保留行分隔符
+		行分割包括\n、\r\n、\r
+字符串大小写
+	upper()
+		转换大写
+	lower()
+		转换小写
+	swapcase()
+		大小写转换
+字符串排版
+	 S.title() -> str
+		首个字母大写
+	S.capitalize() -> str
+		首个单词大写
+	S.center(width[, fillchar]) -> str
+		width 打印宽度
+		fillchar 填充字符
+	zfill(width)---str
+		width,打印宽度，居右，左边用0填充
+	S.ljust(width[, fillchar]) -> str  左对齐
+	S.rjust(width[, fillchar]) -> str  右对齐
+
+字符串修改
+	S.replace(old, new[, count]) -> str
+		字符串中找到匹配替换为新的子串，返回新的字符串
+		count表示替换几次，不指定就全部替换
+
+
+	S.strip([chars]) -> str
+		从字符串两端去除指定的字符集chars中的所有字符
+		如果chars没有指定，去除两端的空白字符
+
+	S.rstrip([chars]) -> str
+		从右边开始
+	S.lstrip([chars]) -> str
+		从左边开始
+	例子：
+		I am very very very sorry
+		s.strip('r y')
+		s = """I am very very very sorry    """
+		print(s.strip('r y'))
+		# I am very very very so
+		print(s.strip('r yamI'))
+		# very very very so
+字符串的查找
+	S.find(sub[, start[, end]]) -> int
+		在指定的区间[start,end],从左向右，查找子串sub,找到后返回索引，没找到返回-1
+	S.rfind(sub[, start[, end]]) -> int
+		在指定区间[start,end],从右向左，查找子串sub,找到后返回索引，没找到返回-1
+
+字符串查找**
+	S.index(sub[, start[, end]]) -> int
+		在指定的区间[start,end]从左向右，查找子串sub,找到后返回索引，没找到返回ValueError
+	S.rindex(sub[, start[, end]]) -> int
+		在指定的区间[start,end]从右向左，查找子串sub,找到后返回索引，没找到返回ValueError
+	时间复杂度
+		index和count方法都是O(n)
+		随着列表数据规模的增大，而效率降低
+	len(string)
+		返回字符串的长度，即字符串的个数
+	S.count(sub[, start[, end]]) -> int
+		在指定的区间[start,end]从左向右，统计子串出现的次数
+
+	S.endswith(suffix[, start[, end]]) -> bool        **
+		在指定区间[start[, end]],字符串是否是suffix结尾
+
+	S.startswith(prefix[, start[, end]]) -> bool **
+		在指定区间[start[, end]],字符串是否是prefix开头
+字符串的判断
+	isalnum()      是否是字母和数字自乘
+	isalpha()      是否是字母
+	isdecimal()   是否值好汉10禁止
+	isdigit()      是否全部数字（0-9）
+	isidentifier()  是不是字母和下划线开通，其他都是字母数字下划线
+	islower()     是否全部小写
+	isupper()     是否全部大写
+	isspace()     是否只包含空白字符
+
+字符串格式化
+	字符串的格式化是一种拼接字符串输出样式的手段，更灵活方便
+	join拼接只能使用分隔符，且要求被拼接的对象是可迭代对象
+	+ 拼接字符串还算方便，但是非字符串需要先转换为字符串才能拼接
+	2.5版本之前，只能使用prinf style 风格的print输出
+		printf-stype formatting,来自于C语言的printf函数
+		格式要求：
+			占位符： 使用%和格式字符组成，例如 %s、%d等
+				s调用str(),r会调用repr(),所有对象得可以被这两个转换
+			占位符中还可以插入修饰字符，，例如%03d表示打印3个位置，不够前面补零，3表示宽度
+			format % values，格式字符串和被格式的值之前使用%分隔
+			values之能是一个对象，或是一个和格式字符串站位符数目相等的元组，或一个字典
+
+字符串格式化***
+	format函数格式字符串语法---python鼓励使用
+	{}{xxx}.format(*args,** kwargs) --str
+		args是位置参数，是一个元组
+		kwargs是关键字参数，是字典
+		花括号表示占位符
+		{}表示按顺序匹配位置参数，{n}表示取位置参数索引为n的值
+		｛xxx｝表示关键字参数中搜索的名称是一致到额
+		{{}} 表示打印花括号
+	示例：
+		位置参数
+		"{}:{}".format('192.168.1.100',8888)  这就是安装位置顺序用的位置参数
+		替换前面的格式字符串的占位符
+
+		关键字参数和命名参数
+		"{server}{1}:{0}".format(8888,'192.18.1.100',server='Web Server info:')位置参数按照序号
+		匹配，关键字参数按照名词匹配
+
+		访问元素
+		"{0[0]}.{0[1]}".format(('magedu','com'))
+
+		对象属性访问(命名tuple)
+		form collections import namedtuple
+			Point = namedtuple('Point','x y')
+			p = Point(4,5)
+			"{{{0.x},{0.y}}}".format(p)
+字符串格式化***
+	对齐，默认右对齐
+		'{0}*{1}={2:<2}'.format(3,2,2*3)    :<2向左偏移
+		'{0}*{1}={2:<02}'.format(3,2,2*3)   :<02向左偏移，
+		'{0}*{1}={2:>02}'.format(3,2,2*3)   :>02向右偏移
+
+		'{:^30}'.format('centered')         :^30 居中
+		#           centered
+		'{:*^30}'.format('centered')        :*^30 星号补充，30居中
+		#***********centered***********
+	进制
+		"int:{0:d}"; hex:{0:x};oct:{0:o};bin:{0:b}".format(42)
+		"int:{0:d}"; hex:{0:#x};oct:{0:#o};bin:{0:#b}".format(42)
+		octets = [192,168,0,1]
+		'{:02X}{:02X}{:02X}{:02X}'.format(*octets)      # *octets,此处*表示参数解构
+														#X:16进制
+
+练习题
+用户输入一个数字
+	判断是几位数？
+	打印每一位数字级其重复的次数
+	依次打印每一位数字，顺序个十百千万...位
+输入5个数字，打印每个数字的位数，将这些数字排序打印，要求升序打印
