@@ -47,7 +47,8 @@ print(sys.path)
 print("----------")
 # 打印当前目录的上一级目录，os.path.abspath(__file__) 去掉文件名的绝对路径
 print(os.path.dirname(os.path.abspath(__file__)))
-
+Basedir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(Basedir)
 # 打印当前目录的上一级目录的上一级目录
 print(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -58,4 +59,11 @@ __file__相对路径
 os.path.abs.path(__file__)把相对路径变为绝对路径
 os.path.dirname()相当于返回上一层
 os.path.dirname(os.path.dirname())返回上级的上级
+如果想在任何目录下调用任何目录下的函数方法，就需要添加如下：
+os.path.dirname()根据需求剥离多少层就调用就可以使用偶数os.path.dirname()层层嵌套的方法
+Basedir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(Basedir)
 """
+from student_day3 import oldboy2
+oldboy2.xiao()
+

@@ -1,5 +1,4 @@
-import sys
+
 def xiao():
-    for i in sys.path:
+    for i in range(5):
         print(i)
-xiao()
