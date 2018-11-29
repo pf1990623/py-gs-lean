@@ -38,7 +38,7 @@ for ele in root:
         print('tag:', e.tag, 'attrib:', e.attrib, 'text', e.text)
         """
         e.tag: rank
-        e.tag: 
+        e.tag:
         e.tag: gdppc
         e.tag: neighbor
         e.tag: neighbor
@@ -65,7 +65,7 @@ for ele in root:
     test: 字典
     ele.attrib['name']：属性name的值
     类似 test['liechtnexxx'] = 'ran'
-    
+
     """
 print(test)
 
@@ -77,4 +77,40 @@ print(test)
 find('nodeName')：表示在该节点下，查找其中第一个tag为nodeName的节点。
 findall('nodeName')：表示在该节点下，查找其中所有tag为nodeName的节点。
 https://blog.csdn.net/lqian1993/article/details/80490982
+"""
+print("==" * 50)
+tree = ET.parse("test.xml")
+root = tree.getroot()
+animNode = root.find('country')  # 查找root节点下第一个tag为country的节点
+print(animNode.tag, animNode.attrib, animNode.text)
+
+
+"""
+删除指定的节点以及保存
+在合并MainFest文件的时候，可能有一些重复的权限，那么怎么删除呢？ 删除指定节点可以通过remove(node)方法，移除指定的节点
+代码示例，比如我们想三处attribute中name为Liechtenstein的节点
+
+"""
+# 加载文档为内存里，形成一个倒树形结构
+tree = ET.parse("test.xml")
+# 获取根节点
+root = tree.getroot()
+# 查找root节点下第一个tag为country的节点
+node = root.find('country')
+# 查找root节点下第一个tag为country的所有节点
+nodes = root.findall('country')
+
+for node in nodes:
+    if node.attrib['name'] == 'Liechtenstein':
+        root.remove(node)   # 移除country中name的属性
+        break
+# 写入到新的文件
+tree.write('test1.xml')
+print("删除成功")
+
+"""
+python标准库提供了一组极少使用但有用的接口来处理xml。两个最基本和最广泛使用搞砸xnl数据的API是SAX 和DOM接口
+    SAX：简单的xml（API  SAX） 在这里，当文档较大或内存限制时，此功能非常有用，它会从文件读取文件时解析文件，
+    并且整个文件不会存储在内存中
+    DOM：文档对象模型，它将整个文件读入到存储器中并以分层（基于树）的形式存储，以表示xml文档的所有功能
 """
