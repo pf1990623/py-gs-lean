@@ -1,0 +1,6 @@
+2018-12-03 17:27:59,849 - test.log - WARNING - test warning
+2018-12-03 17:27:59,849 - test.log - ERROR - test error
+2018-12-03 17:27:59,849 - test.log - CRITICAL - test critical
+2018-12-03 17:35:31,718 - test.log - WARNING - test warning
+2018-12-03 17:35:31,718 - test.log - ERROR - test error
+2018-12-03 17:35:31,718 - test.log - CRITICAL - test critical
