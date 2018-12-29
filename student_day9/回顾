@@ -1,0 +1,60 @@
+抽象方法
+    导入abc
+静态方法：
+    @staticmethod  不能访问类的任何属性
+
+    @classmethod: 类方法
+                只能访问公用属性，及全局属性
+    @ property：属性方法
+                把一个方法变成一个静态属性
+    def sayhi()
+        pass
+
+    @sayhi.setter
+    def sayhi(k)
+        pass
+    @sayhi.delter
+    def sayhi()
+        pass
+    __call__ 方法： 实例(),会触发call method
+    __str__ 方法：返回实例的字符串形式
+    __dict__方法：打印实例中所有属性值
+    __getitem__  以字典的形式操作实例
+    __new__ 方法：先于init执行，可以在new中自定义类的实例化过程
+    __metaclass__ 元类，
+    type()  可以动态创建一个类，
+    try...except
+        IOError:
+        ValueErrror:
+        IndexError：超出索引范围
+        IndentationError：语法错误，错误不会被抓取
+        typeError:类型错误
+        SyntaxError: 语法错误，错误不会被抓取
+
+    try:
+        raise
+    except:
+        pass
+    else:
+        pass
+    断言
+        assert
+
+    __import__  动态导入
+
+    反射：
+        hasattr
+        getattr
+        setattr
+        delattr
+socket
+    s = socket.socket(IpV4,socket.SOCK_STREAM)
+    s.bind(())
+    s.listen(5)
+
+    conn,client_addr = s.accept()
+    conn.send()
+    conn.recv()
+
+
+
