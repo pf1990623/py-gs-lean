@@ -13,6 +13,7 @@ import optparse
 from core.ftp_server import Ftphandler
 import socketserver
 from conf import settings
+
 """
 参数处理模块
 """
@@ -40,6 +41,7 @@ class ArgvHandler(object):
 
 
     def start(self):
+        print("----start ----ftp ---- server ---")
         server = socketserver.ThreadingTCPServer((settings.HOST, settings.PORT), Ftphandler)
         server.serve_forever()
 

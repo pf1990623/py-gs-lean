@@ -9,51 +9,75 @@
 @time: 2018/12/28 11:34
 """
 import socket
-import os,json
+import os
+import json
 import optparse
+import getpass
 
 
 class FtpClient(object):
     def __int__(self):
         parser = optparse.OptionParser
-        parser.add_option("-s", "--server", dest="server", help= "ftp server ip")
+        parser.add_option("-s", "--server", dest="server", help="ftp server ip")
         parser.add_option("-P", "--port",type=int,dest="port", help="ftp server port")
         parser.add_option("-u", "--username", dest="username", help="ftp user")
         parser.add_option("-p", "--password", dest="password", help="ftp user password")
         self.options, self.args = parser.parse_args()
-        self.verity_args(self.options, self.args)
+        self.verify_args(self.options, self.args)
+        self.make_connection()
 
-    def verity_args(self, options, args):
+    def make_connection(self):
+        self.sock = socket.socket()
+        self.sock.connect = ((self.options.server,self.options.port))
+
+    def verify_args(self, options, args):
         """校验参数的合法性"""
-        if options.usname is None and options.password is None:
+        if options.usname is not None and options.password is not None:
             print("xxxxx")
         else:
             if options.usname is None or options.password is None:
                 print("Err: username and password ")
         if options.server and options.port:
             print(options)
-            if options.port >0 and options.port <65535:
+            if options.port > 0 and options.port <65535:
                 return True
             else:
-                exec("Err: host port must in ")
+                exit("Err: host port must in ")
 
     def authenticate(self):
+        """用户验证"""
         if self.options.username:
-            print(self.options.username,self.options.password)
+            print(self.options.username, self.options.password)
+            self.get_auth_reslut(self.options.username, self.options.password)
         else:
             retry_count = 0
             while retry_count < 3:
                 username = input("username:").strip()
                 password = input("password").strip()
-                self.get_auth_result(username,password)
+                self.get_auth_result(username, password)
 
+    def get_auth_resul(self, user, password):
+        data = {"action": "auth",
+                "username": user,
+                "password": password
+                }
+        self.sock.send(json.dumps(data).encode())
+        self.get_response()
+
+    def get_responce(self):
+        """
+        得到服务器回复结果
+        :return:
+        """
+        data = self.sock.recv(1024)
+        data = json.loads(data.decode())
+        print("responce data:", data)
 
     def interactive(self):
         if self.authenticate():
             print("xxxxx")
 
 
-
 if __name__ == "__main__":
     ftp = FtpClient()
-    ftp.interactive()
+    ftp.interactive()  # 交互
