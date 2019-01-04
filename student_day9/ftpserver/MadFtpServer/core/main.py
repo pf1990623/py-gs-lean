@@ -10,7 +10,7 @@
 """
 
 import optparse
-from core.ftp_server import Ftphandler
+from core.ftp_server import FtpHandler
 import socketserver
 from conf import settings
 
@@ -42,7 +42,7 @@ class ArgvHandler(object):
 
     def start(self):
         print("----start ----ftp ---- server ---")
-        server = socketserver.ThreadingTCPServer((settings.HOST, settings.PORT), Ftphandler)
+        server = socketserver.ThreadingTCPServer((settings.HOST, settings.PORT), FtpHandler)
         server.serve_forever()
 
 

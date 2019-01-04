@@ -8,13 +8,19 @@
 @file: ftp_server.py
 @time: 2018/12/28 11:17
 """
-
+import os
+import hashlib
 import socketserver
 import json
+import configparser
+from conf import settings
+
 
 STATUS_CODE = {
-    100: "INVALID CMD formart e.g{'aciton':'get',filename:'test.py,size:3343}"
-    101: "Incalid cmd"
+    100: "INVALID CMD formart e.g{'aciton':'get',filename:'test.py,size:3343}",
+    101: "Invalid cmd",
+    252: "invalid auth data ",
+    253: "wrong username or password"
 }
 
 class FtpHandler(socketserver.BaseRequestHandler):
@@ -26,8 +32,8 @@ class FtpHandler(socketserver.BaseRequestHandler):
             if not self.data: break
             data = json.loads(self.data.decode)
             if data.get("action") is not None:
-                if hasattr(self,"__%s" % data.getdata.get("action")):
-                    func = getattr("__%s" % data.getdata.get("action"))
+                if hasattr(self,"_%s" % data.getdata.get("action")):
+                    func = getattr("_%s" % data.getdata.get("action"))
                     func(data)
                 else:
                     print("invalid cmd")
@@ -47,21 +53,40 @@ class FtpHandler(socketserver.BaseRequestHandler):
             response.update(data)
         self.request.send(json.dumps(response).encode())
 
+    def _auth(self, *args, **kwargs):
+        data = args[0]
+        if data.get("username") is None or data.get["password"] is None:
+            self.send_responce(252)
+        user = self.authenticate(data.get("username"),data.get["password"])
+        if user is None:
+            self.send_responce(253)
+        else:
+            print("pass authtidate ",user)
 
 
+    def authenticate(self,username,passwpord):
+        """验证用户合法性"""
+        config = configparser.ConfigParser()
+        config.read(settings.ACCOUNT_FILE)
+        if username in config.sections():
+            _password = config[username]["Password"]
+            if _password == passwpord:
+                print("pass auth..,", username)
+                return config[username]
 
-    def __put(self, *args, **kwargs):
+
+    def _put(self, *args, **kwargs):
         """client send file to server"""
         pass
 
-    def __get(self, *args, **kwargs):
+    def _get(self, *args, **kwargs):
         """server send file client"""
         pass
 
-    def __ls(self,*args, **kwargs):
+    def _ls(self,*args, **kwargs):
         pass
 
-    def __cd(self, *args, **kwargs):
+    def _cd(self, *args, **kwargs):
         pass
 
 

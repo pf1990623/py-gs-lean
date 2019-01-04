@@ -15,6 +15,9 @@ USER_HOME = "%s/home" % BASE_DIR
 LOG_DIR = "%s/log" % BASE_DIR
 LOG_LEVEL = "DEBUG"
 ACCOUNT_DIR = "%s/db" %BASE_DIR
+CORE_DIR = "%s/core" %BASE_DIR
+
+ACCOUNT_FILE = "%s/conf/accounts.cfg" %BASE_DIR
 
 HOST = "0.0.0.0"
 PORT = 9999

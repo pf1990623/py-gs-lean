@@ -47,6 +47,7 @@
         getattr
         setattr
         delattr
+        反射不支持类的私有方法
 socket
     s = socket.socket(IpV4,socket.SOCK_STREAM)
     s.bind(())
